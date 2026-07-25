@@ -14,14 +14,13 @@ fn main() {
 
     command = command.trim().to_string();
 
-    if command.starts_with("echo ") {
-    println!("{}",command);
-    }
     if command == "exit" {
-    process::exit(0);
-
+    	process::exit(0);
+    } else if command.starts_with("echo "){
+	println!("{}", &command[5..]);
+    } else {
+	println!("{}: command not found", command.trim());
     }
 
-    println!("{}: command not found", command.trim());
 }
 }
