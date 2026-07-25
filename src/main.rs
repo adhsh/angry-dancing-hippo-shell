@@ -6,8 +6,8 @@ fn main() {
     print!("$ ");
     io::stdout().flush().unwrap();
     let mut command = String::new();
-    command = command.trim().to_string();
     io::stdin().read_line(&mut command).unwrap();
+    command = command.trim().to_string();
     if command == "exit" {
     process::exit(0);
     }
