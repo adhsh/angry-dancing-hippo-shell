@@ -4,7 +4,7 @@ use std::io::{self, Write};
 fn main() {
     print!("$ ");
     io::stdout().flush().unwrap();
-    let mut Command = String::new();
+    let mut command = string::new();
     io::stdin().read_line(&mut command).unwrap();
     println!("{}: command not found", command.trim());
 }
