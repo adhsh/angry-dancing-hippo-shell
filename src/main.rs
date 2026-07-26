@@ -18,7 +18,7 @@ fn main() {
     let arg = &command[5..];
     let builtins = ["echo", "exit", "type"];
 
-    if builtins.contain(&arg) {
+    if builtins.contains(&arg) {
 	println!("{} is a shell builtin", arg);
     } else {
 	println!("{}: not found", arg)
