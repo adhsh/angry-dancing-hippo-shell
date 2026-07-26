@@ -12,7 +12,7 @@ fn main() {
 
         command = command.trim().to_string();
 
-        if command == "exit 0" {
+        if command == "exit" {
             std::process::exit(0);
         } else if command.starts_with("echo ") {
             println!("{}", &command[5..]);
