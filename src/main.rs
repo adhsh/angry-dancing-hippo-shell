@@ -58,6 +58,7 @@ fn main() {
                     if let Ok(metadata) = std::fs::metadata(&full_path) {
                         if metadata.permissions().mode() & 0o111 != 0 {
                             std::process::Command::new(&full_path)
+                                .arg0(cmd)
                                 .args(args)
                                 .status()
                                 .unwrap();
