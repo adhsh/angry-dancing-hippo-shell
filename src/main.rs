@@ -1,5 +1,6 @@
 #[allow(unused_imports)]
 use std::io::{self, Write};
+use std::os::unix::process::CommandExt;
 use std::process;
 
 fn main() {
