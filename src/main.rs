@@ -44,7 +44,32 @@ fn main() {
                 }
             }
         } else {
-            println!("{}: command not found", command);
+            let parts: Vec<&str> = command.split_whitespace().collect();
+            let cmd = parts[0];
+            let args = &parts[1..];
+
+            let path = std::env::var("PATH").unwrap_or_default();
+            let mut found = false;
+            for dir in path.split(':') {
+                let full_path = format!("{}/{}", dir, cmd);
+                let path_obj = std::path::Path::new(&full_path);
+                if path_obj.exists() {
+                    use std::os::unix::fs::PermissionsExt;
+                    if let Ok(metadata) = std::fs::metadata(&full_path) {
+                        if metadata.permissions().mode() & 0o111 != 0 {
+                            std::process::Command::new(&full_path)
+                                .args(args)
+                                .status()
+                                .unwrap();
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if !found {
+                println!("{}: command not found", cmd);
+            }
         }
     }
 }
