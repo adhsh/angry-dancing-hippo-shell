@@ -19,9 +19,11 @@ fn main() {
             println!("{}", &command[5..]);
         } else if command == "pwd" {
             println!("{}", std::env::current_dir().unwrap().display());
-	} else if command.starts_with("cd "){ 
-	  let dir = &command[3..];
-	  std::env::set_current_dir(dir).unwrap();
+        } else if command.starts_with("cd ") {
+            let dir = &command[3..];
+            if std::env::set_current_dir(dir).is_err() {
+                println!("cd: {}: No such file or directory", dir);
+            }
         } else if command.starts_with("type ") {
             let arg = &command[5..];
             let builtins = ["echo", "exit", "type", "pwd", "cd"];
