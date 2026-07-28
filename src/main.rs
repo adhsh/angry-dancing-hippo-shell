@@ -17,6 +17,8 @@ fn main() {
             std::process::exit(0);
         } else if command.starts_with("echo ") {
             println!("{}", &command[5..]);
+	} else if command.starts_with("pwd ") {
+	    println!("{}", std::env::current_dir().unwrap().display())
         } else if command.starts_with("type ") {
             let arg = &command[5..];
             let builtins = ["echo", "exit", "type"];
