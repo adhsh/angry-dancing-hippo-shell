@@ -19,9 +19,12 @@ fn main() {
             println!("{}", &command[5..]);
         } else if command == "pwd" {
             println!("{}", std::env::current_dir().unwrap().display());
+	} else if command.starts_with("cd "){ 
+	  let dir = &command[3..];
+	  std::env::set_current_dir(dir).unwrap();
         } else if command.starts_with("type ") {
             let arg = &command[5..];
-            let builtins = ["echo", "exit", "type", "pwd"];
+            let builtins = ["echo", "exit", "type", "pwd", "cd"];
 
             if builtins.contains(&arg) {
                 println!("{} is a shell builtin", arg);
